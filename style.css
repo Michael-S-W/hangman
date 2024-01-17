@@ -1,0 +1,363 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  caret-color: transparent;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+:root {
+  --main-color: rgb(137, 66, 137);
+  --main-dark: #222;
+}
+body {
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
+  max-width: 1000px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 5px 5px 10px #222;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 4px solid var(--main-color);
+}
+
+.header span {
+  display: block;
+  color: rgb(126, 43, 171);
+  font-size: 20px;
+  text-wrap: wrap;
+  padding: 0 20px;
+}
+
+.game-area {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+.drawing {
+  width: 400px;
+  height: 300px;
+  border: 2px solid #dddddd;
+  background-color: #fbfbfb;
+  position: relative;
+}
+.hangBase {
+  position: absolute;
+  width: 100px;
+  height: 4px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: var(--main-dark);
+  display: none;
+}
+.hangBar {
+  position: absolute;
+  width: 4px;
+  height: 260px;
+  bottom: 0;
+  left: 40%;
+  transform: translate(-50%, 0);
+  background-color: var(--main-dark);
+  display: none;
+}
+.hangBar::before {
+  position: absolute;
+  content: "";
+  height: 4px;
+  width: 80px;
+  background-color: var(--main-dark);
+  top: 0;
+  left: 0;
+}
+
+.hangRope {
+  position: absolute;
+  border-right: 4px dashed var(--main-dark);
+  height: 50px;
+  right: 41%;
+  top: 13%;
+  display: none;
+}
+.hangRope::before {
+  position: absolute;
+  content: "";
+  height: 50px;
+  width: 50px;
+  border: 4px dashed var(--main-dark);
+  border-radius: 50%;
+  top: 88%;
+  right: -32px;
+}
+
+.hangHead {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border: 4px solid var(--main-dark);
+  border-radius: 50%;
+  top: 30%;
+  right: 35%;
+  display: none;
+}
+
+.hangBody {
+  position: absolute;
+  width: 4px;
+  height: 70px;
+  top: 136px;
+  left: 233px;
+  background-color: var(--main-dark);
+  display: none;
+}
+.hangArms {
+  display: none;
+}
+.hangArms:before,
+.hangArms:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 4px;
+  background-color: var(--main-dark);
+  top: 160px;
+}
+.hangArms:before {
+  left: 224px;
+  transform: rotate(60deg);
+}
+.hangArms:after {
+  left: 196px;
+  transform: rotate(-60deg);
+}
+
+.hangLegs {
+  display: none;
+}
+.hangLegs:before,
+.hangLegs:after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 4px;
+  background-color: var(--main-dark);
+  top: 232px;
+}
+.hangLegs:before {
+  left: 212px;
+  transform: rotate(70deg);
+}
+.hangLegs:after {
+  left: 188px;
+  transform: rotate(-70deg);
+}
+/* /////////////////////////////////////////////////////////// */
+.drawing.wrong-1 .hangBase {
+  display: block;
+}
+.drawing.wrong-2 .hangBar {
+  display: block;
+}
+.drawing.wrong-3 .hangRope {
+  display: block;
+}
+.drawing.wrong-4 .hangHead {
+  display: block;
+}
+.drawing.wrong-5 .hangBody {
+  display: block;
+}
+.drawing.wrong-6 .hangArms {
+  display: block;
+}
+.drawing.wrong-7 .hangLegs {
+  display: block;
+}
+.game {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lettersToGuess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 20px 0;
+  text-wrap: wrap;
+}
+
+.letter,
+button {
+  width: 40px;
+  height: 40px;
+  flex-wrap: wrap;
+  text-align: center;
+  background-color: var(--main-color);
+}
+.letter {
+  border-bottom: 2px solid var(--main-dark);
+}
+
+.letter.guessed,
+.letter.space {
+  text-transform: uppercase;
+  color: black;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 40px;
+  background-color: white;
+  border: none;
+}
+
+.buttons {
+  /* width: 100%; */
+  max-width: 400px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+}
+hr {
+  background-color: var(--main-color);
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+button {
+  padding: 0;
+  color: white;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: calc(100% / 9 - 5px);
+  border: 2px solid rgb(101, 45, 101);
+  border-radius: 5px;
+}
+button.disabled,
+button.disabled:hover,
+button.disabled:active {
+  /* pointer-events: none; */
+  cursor: no-drop;
+  background-color: grey;
+  border: 2px solid rgb(80, 80, 80);
+}
+button:hover {
+  background-color: rgb(173, 121, 173);
+}
+
+button:active {
+  background-color: rgb(108, 40, 108);
+}
+.the-end {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(22, 22, 22, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.the-end-div {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: fit-content;
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px var(--main-dark);
+}
+.the-end-div img {
+  width: 150px;
+  padding: 10px;
+}
+.the-end-div .first-line {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(255, 89, 0);
+  padding: 0px 30px;
+}
+.the-end-div .second-line {
+  font-size: 24px;
+  padding: 10px 0px;
+}
+.the-end-div .second-line span {
+  font-weight: bold;
+  color: rgb(255, 0, 149);
+}
+
+.the-end-div button {
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 30px 30px;
+  text-align: center;
+  line-height: 0px;
+  font-weight: bold;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #222;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  line-height: 28px;
+}
+@media (min-width: 754px) {
+  .game-area {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .game {
+    flex: 1;
+  }
+  hr {
+    display: none;
+  }
+  button {
+    width: calc(100% / 6 - 5px);
+    border: 2px solid rgb(101, 45, 101);
+    border-radius: 5px;
+  }
+}
