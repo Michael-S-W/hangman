@@ -279,7 +279,7 @@ button:active {
   background-color: rgb(108, 40, 108);
 }
 .the-end {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -293,7 +293,7 @@ button:active {
 
 .the-end-div {
   position: absolute;
-  top: 25%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
